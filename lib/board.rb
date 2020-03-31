@@ -1,6 +1,15 @@
 class Board
   @@board = {}
-  @@win_combos = []
+  @@win_combos = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 5, 9],
+    [3, 5, 7]
+  ]
   
 
   def self.create_board
@@ -13,19 +22,22 @@ class Board
 
   def exists?(value)
     if value.is_a? Integer
-      return false  unless value > 0 && value < 10
+      value > 0 && value < 10
     else
-      return false
+      false
     end
-   true
   end
 
   def busy?(value)
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
-  def game_over?
-    
+  def win?(played)
+    result = false
+    @@win_combos.each do |combo|
+      result = (combo - played).empty?
+    end
+    result
   end
 
   def update_cell(value, symb)
