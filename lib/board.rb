@@ -20,7 +20,7 @@ class Board
     end
   end
 
-  def exists?(value)
+  def self.exists?(value)
     if value.is_a? Integer
       value > 0 && value < 10
     else
@@ -28,11 +28,11 @@ class Board
     end
   end
 
-  def busy?(value)
+  def self.busy?(value)
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
-  def win?(played)
+  def self.win?(played)
     result = false
     @@win_combos.each do |combo|
       result = (combo - played).empty?
@@ -40,7 +40,7 @@ class Board
     result
   end
 
-  def update_cell(value, symb)
+  def self.update_cell(value, symb)
     @@board[value] = symb
   end
 

@@ -20,44 +20,55 @@ gets
 
 #get names
 p 'What is your name palyer1 ? '
-name1=gets.chomp
+name=gets.chomp
+player1=Player.new(name,1)
 
 p 'What is your name palyer2 ? '
-name2=gets.chomp
+name=gets.chomp
+player2=Player.new(name,2)
 
 p 'SHOW EMPTY BOARD'
 
-i=0
-
+i=0   #counter to control left cells
+winner=nil
 loop do
+  movement=''
     loop do
-      p "Select a valid cell, #{name1} ?"
+      p "Select a valid cell, #{player1.name} ?"
       movement=gets.chomp
-      p 'Validate if cell is empty or legal'
-      break if movement.to_i>0 && movement.to_i<10
+      valid=true
+      if movement.match(/\d/)
+        valid=Board.exists?(movement.to_i)
+        valid=Board.busy?(movement.to_i) if valid
+      end
+      break if valid
     end
-    p 'Validate if there is a winner or a tie'
-    p "#{name1} this is your movement.."
-    p "REDRAW THE BOARD"
-    p 'Enter to continue'
+    player1.save_play(movement.to_i)
+    winner=player1 if Board.win?(player1.played_cells)
     gets
     system "clear"
     i+=1
     break if i==5
     loop do
-      p "Select a valid cell, #{name2} ?"
+      p "Select a valid cell, #{player2.name} ?"
       movement=gets.chomp
-      p 'Validate if cell is empty or legal'
-      break if movement.to_i>0 && movement.to_i<10
+      valid=true
+      if movement.match(/\d/)
+        valid=Board.exists?(movement.to_i)
+        valid=Board.busy?(movement.to_i) if valid
+      end
+      break if valid
     end
+    player2.save_play(movement.to_i)
+    winner=player2 if Board.win?(player2.played_cells)
     p 'Validate if there is a winner or a tie'
     p "#{name2} this is your movement.."
     p "REDRAW THE BOARD"
     i+=1
-    break if i==5
-    # sleep 15
+    break if i==9 || winner
     p 'Enter to continue'
     gets
     system "clear"
 end
+p "#{winner.name} IS THE WINNER!" if winner
 p 'GAME OVER !'
