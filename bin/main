@@ -1,8 +1,22 @@
 #!/usr/bin/env ruby
+require './lib/board.rb'
+def board_draw(board)
+  puts "#{board[1]} | #{board[2]} | #{board[3]}"
+  puts "----------"
+  puts "#{board[4]} | #{board[5]} | #{board[6]}"
+  puts "----------"
+  puts "#{board[7]} | #{board[8]} | #{board[9]}"
+end
+
 system "clear"
 puts "W E L C O M E    T O   T I C T A C T O E!"
 sleep 3
 system "clear"
+
+Board.create_board
+board_draw(Board.board)
+
+gets
 
 #get names
 p 'What is your name palyer1 ? '
