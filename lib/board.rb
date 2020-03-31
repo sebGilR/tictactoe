@@ -13,7 +13,7 @@ class Board
 
   def exists?(value)
     if value.is_a? Integer
-      return false  unless value > 0 && value <10
+      return false  unless value > 0 && value < 10
     else
       return false
     end
@@ -21,15 +21,15 @@ class Board
   end
 
   def busy?(value)
-    @@board[value]=='X' || @@board[value]=='O'
+    @@board[value] == 'X' || @@board[value] == 'O'
   end
 
   def game_over?
     
   end
 
-  def update_cell(value,symb)
-    @@board[value]=symb
+  def update_cell(value, symb)
+    @@board[value] = symb
   end
 
   def self.board
