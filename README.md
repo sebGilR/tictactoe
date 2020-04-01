@@ -38,17 +38,16 @@
 
 ## Authors
 
-👤 **Author1**
+👤 **Carlos Prieto Barrón**
 
-- Github: [@UPDATE](https://github.com/UPDATE)
-- Twitter: [@UPDATE](https://twitter.com/UPDATE)
-- Linkedin: [linkedin](UPDATE)
+- Github: [@carlosprietobarron](https://github.com/carlosprietobarron)
+- Twitter: [@CarlosA40795725](https://twitter.com/CarlosA40795725)
 
-👤 **Author2**
+👤 **Sebastian Gil Rodriguez**
 
-- Github: [@lBuggie](https://github.com/lBuggie)
+- Github: [@sebGilR](https://github.com/sebGilR)
 - Twitter: [@sebGilR](https://twitter.com/sebGilR)
-- Linkedin: [linkedin](https://www.linkedin.com/in/sebastian-gil-rodriguez-9b776073)
+- Linkedin: [linkedin](https://www.linkedin.com/in/sebastiangilrodriguez)
 
 ## 🤝 Contributing
 
