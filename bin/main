@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
+system "clear"
+puts "W E L C O M E    T O   T I C T A C T O E!"
+sleep 3
+system "clear"
 
-puts "Hello world!" 
+#get names
+p 'What is your name palyer1 ? '
+name1=gets.chomp
+
+p 'What is your name palyer2 ? '
+name2=gets.chomp
+
+p 'SHOW EMPTY BOARD'
+
+i=0
+
+loop do
+    loop do
+      p "Select a valid cell, #{name1} ?"
+      movement=gets.chomp
+      p 'Validate if cell is empty or legal'
+      break if movement.to_i>0 && movement.to_i<10
+    end
+    p 'Validate if there is a winner or a tie'
+    p "#{name1} this is your movement.."
+    p "REDRAW THE BOARD"
+    p 'Enter to continue'
+    gets
+    system "clear"
+    i+=1
+    break if i==5
+    loop do
+      p "Select a valid cell, #{name2} ?"
+      movement=gets.chomp
+      p 'Validate if cell is empty or legal'
+      break if movement.to_i>0 && movement.to_i<10
+    end
+    p 'Validate if there is a winner or a tie'
+    p "#{name2} this is your movement.."
+    p "REDRAW THE BOARD"
+    i+=1
+    break if i==5
+    # sleep 15
+    p 'Enter to continue'
+    gets
+    system "clear"
+end
+p 'GAME OVER !'
