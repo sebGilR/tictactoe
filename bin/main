@@ -24,56 +24,56 @@ def get_movement(player)
   movement = ''
   loop do
     puts "\nSelect a valid cell, #{player.name} ?"
-    movement=gets.chomp
-    valid=false
+    movement = gets.chomp
+    valid = false
     if movement.match(/\d+/)
-      valid=Board.exists?(movement.to_i)
-      valid=!Board.busy?(movement.to_i) if valid
+      valid = Board.exists?(movement.to_i)
+      valid = !Board.busy?(movement.to_i) if valid
     end
     break if valid
   end
   save(movement, player)
 end
 
-system "clear"
-puts "W E L C O M E    T O   T I C T A C T O E!"
+system 'clear'
+puts 'W E L C O M E    T O   T I C T A C T O E!'
 sleep 2
-system "clear"
+system 'clear'
 
 #get names
-name=''
+name = ''
 loop do
-  system "clear"
-  puts 'What is your name palyer1 ? '
-  name=gets.chomp
+  system 'clear'
+  puts 'What is your name PLAYER #1 ? '
+  name = gets.chomp
   break if is_valid?(name)
 end 
-player1=Player.new(name,1)
+player1 = Player.new(name,1)
 
-name=''
+name = ''
 loop do
-  system "clear"
-  puts 'What is your name palyer2 ? '
-  name=gets.chomp
+  system 'clear'
+  puts 'What is your name PLAYER #2 ? '
+  name = gets.chomp
   break if is_valid?(name)
 end
-player2=Player.new(name,2)
+player2 = Player.new(name,2)
 
 sleep 1
 # 'SHOW EMPTY BOARD'
-system "clear"
+system 'clear'
 Board.create_board
 
-i=0   #counter to control left cells
-winner=nil
+i = 0   #counter to control left cells
+winner = nil
 loop do
     board_draw(Board.board)
     get_movement(player1)
     winner = player1.name if Board.win?(player1.played_cells)
     i+=1
-    break if winner == player1.name|| i == 9
+    break if winner == player1.name || i == 9
     sleep 1
-    system "clear"
+    system 'clear'
 
     board_draw(Board.board)
     get_movement(player2)
@@ -81,10 +81,10 @@ loop do
     i+=1
     break if winner == player2.name || i == 9
     sleep 1
-    system "clear"
+    system 'clear'
 end
 
-system "clear"
+system 'clear'
 board_draw(Board.board)
 puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
 puts '\nGAME OVER! It\'s a tie' if i == 9 && !winner
