@@ -34,8 +34,8 @@ class Board
   end
 
   def self.valid_move?(movement)
-    valid = self.exists?(movement.to_i)
-    !self.busy?(movement.to_i) if valid
+    valid = Board.exists?(movement.to_i)
+    !Board.busy?(movement.to_i) if valid
   end
 
   def self.win?(played)
