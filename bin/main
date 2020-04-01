@@ -29,10 +29,11 @@ def get_movement(player)
     movement = gets.chomp
     valid = false
     if movement.match(/\d+/)
-      valid = Board.exists?(movement.to_i)
-      valid = !Board.busy?(movement.to_i) if valid
+      valid = Board.valid_move?(movement.to_i)
     end
     break if valid
+    system 'clear'
+    board_draw(Board.board)
   end
   save(movement, player)
 end
