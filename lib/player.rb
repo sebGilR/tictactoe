@@ -4,6 +4,7 @@ class Player
   def initialize(name, id)
     @name = name
     @id = id
+    @played_cells = []
   end
 
   def symb
@@ -14,10 +15,9 @@ class Player
     end
   end
 
-  @played_cells = []
-
   def save_play(cell)
-    @played_cells << cell
+    p @played_cells.class
+    @played_cells.to_a.push(cell) 
   end
 
   def played_cells

@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require './lib/board.rb'
+require './lib/player.rb'
+
 def board_draw(board)
   puts "#{board[1]} | #{board[2]} | #{board[3]}"
   puts "----------"
@@ -8,66 +10,76 @@ def board_draw(board)
   puts "#{board[7]} | #{board[8]} | #{board[9]}"
 end
 
+def is_valid?(name)
+  return true if name.match(/[\w]{2,}/)
+  false
+end
+
+def get_movement(player)
+  movement=''
+  loop do
+    p "Select a valid cell, #{player.name} ?"
+    movement=gets.chomp
+    valid=true
+    if movement.match(/\d/)
+      valid=Board.exists?(movement.to_i)
+      p valid.to_s
+      valid=!Board.busy?(movement.to_i) if valid
+      p valid.to_s
+    end
+    break if valid
+  end
+  player.save_play(movement.to_i)
+  Board.update_cell(movement.to_i,player.symb)
+  winner=player if Board.win?(player.played_cells)
+
+end
+
 system "clear"
 puts "W E L C O M E    T O   T I C T A C T O E!"
 sleep 3
 system "clear"
 
-Board.create_board
-board_draw(Board.board)
-
-gets
-
 #get names
-p 'What is your name palyer1 ? '
-name=gets.chomp
+name=''
+loop do
+  system "clear"
+  p 'What is your name palyer1 ? '
+  name=gets.chomp
+  break if is_valid?(name)
+end 
 player1=Player.new(name,1)
 
-p 'What is your name palyer2 ? '
-name=gets.chomp
+name=''
+loop do
+  system "clear"
+  p 'What is your name palyer2 ? '
+  name=gets.chomp
+  break if is_valid?(name)
+end
 player2=Player.new(name,2)
 
-p 'SHOW EMPTY BOARD'
+p "Player1 #{player1.name} Player2 #{player2.name}"
+sleep 1
+# 'SHOW EMPTY BOARD'
+system "clear"
+Board.create_board
+board_draw(Board.board)
+p 'push enter to continue..'
+gets
 
 i=0   #counter to control left cells
 winner=nil
 loop do
-  movement=''
-    loop do
-      p "Select a valid cell, #{player1.name} ?"
-      movement=gets.chomp
-      valid=true
-      if movement.match(/\d/)
-        valid=Board.exists?(movement.to_i)
-        valid=Board.busy?(movement.to_i) if valid
-      end
-      break if valid
-    end
-    player1.save_play(movement.to_i)
-    winner=player1 if Board.win?(player1.played_cells)
-    gets
+    get_movement(player1)
+    sleep 1
     system "clear"
     i+=1
     break if i==5
-    loop do
-      p "Select a valid cell, #{player2.name} ?"
-      movement=gets.chomp
-      valid=true
-      if movement.match(/\d/)
-        valid=Board.exists?(movement.to_i)
-        valid=Board.busy?(movement.to_i) if valid
-      end
-      break if valid
-    end
-    player2.save_play(movement.to_i)
-    winner=player2 if Board.win?(player2.played_cells)
-    p 'Validate if there is a winner or a tie'
-    p "#{name2} this is your movement.."
-    p "REDRAW THE BOARD"
+    get_movement(player2)
     i+=1
-    break if i==9 || winner
-    p 'Enter to continue'
-    gets
+    break if i==5 || winner
+    sleep 1
     system "clear"
 end
 p "#{winner.name} IS THE WINNER!" if winner

@@ -29,6 +29,7 @@ class Board
   end
 
   def self.busy?(value)
+    print @@board[value]
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
