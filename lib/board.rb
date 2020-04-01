@@ -14,10 +14,8 @@ class Board
   ]
 
   def self.create_board
-    i = 1
-    while i < 10
+    (1..9).each do |i|
       @@board[i] = i.to_s
-      i += 1
     end
   end
 
