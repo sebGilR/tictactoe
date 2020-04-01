@@ -21,8 +21,6 @@ class Board
     end
   end
 
-private
-
   def self.exists?(value)
     if value.is_a? Integer
       value.positive? && value < 10
@@ -35,12 +33,9 @@ private
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
-public
-
   def self.valid_move?(movement)
-    valid = false
-    valid = Board.exists?(movement.to_i)
-    valid = !Board.busy?(movement.to_i) if valid
+    valid = self.exists?(movement.to_i)
+    !self.busy?(movement.to_i) if valid
   end
 
   def self.win?(played)

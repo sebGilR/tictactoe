@@ -28,10 +28,9 @@ def get_movement(player)
     puts 'Select a valid cell by entering the cell number?'
     movement = gets.chomp
     valid = false
-    if movement.match(/\d+/)
-      valid = Board.valid_move?(movement.to_i)
-    end
+    valid = Board.valid_move?(movement.to_i) if movement.match(/\d+/)
     break if valid
+
     system 'clear'
     board_draw(Board.board)
   end
