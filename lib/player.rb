@@ -1,6 +1,7 @@
 class Player
   attr_reader :name
-  
+  attr_reader :played_cells
+
   def initialize(name, id)
     @name = name
     @id = id
@@ -9,17 +10,13 @@ class Player
 
   def symb
     if @id == 1
-      "X"
+      'X'
     elsif @id == 2
-      "O"
+      'O'
     end
   end
 
   def save_play(cell)
-    @played_cells.push(cell) 
-  end
-
-  def played_cells
-    @played_cells
+    @played_cells.push(cell)
   end
 end

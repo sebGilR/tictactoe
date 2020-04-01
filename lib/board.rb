@@ -1,3 +1,5 @@
+# rubocop: disable Style/ClassVars
+
 class Board
   @@board = {}
   @@win_combos = [
@@ -10,7 +12,6 @@ class Board
     [1, 5, 9],
     [3, 5, 7]
   ]
-  
 
   def self.create_board
     i = 1
@@ -22,7 +23,7 @@ class Board
 
   def self.exists?(value)
     if value.is_a? Integer
-      value > 0 && value < 10
+      value.positive? && value < 10
     else
       false
     end
@@ -51,3 +52,4 @@ class Board
     @@board
   end
 end
+# rubocop: enable Style/ClassVars
