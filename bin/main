@@ -25,10 +25,25 @@ def get_movement(player)
   movement = ''
   loop do
     puts "\n#{player.name}, your symbol is: #{player.symb}"
-    puts 'Select a valid cell by entering the cell number?'
+    print 'Select a valid cell by entering the cell number: '
     movement = gets.chomp
     valid = false
-    valid = Board.valid_move?(movement.to_i) if movement.match(/\d+/)
+
+    if movement.match(/\d+/)
+      if Board.valid_move?(movement.to_i)
+        valid = true
+      else
+        system 'clear'
+        board_draw(Board.board)
+        puts "\nThe selected cell is either busy or doesn\'t exist."
+        get_movement(player)
+        break
+      end
+    else
+      puts 'Please enter a number from 1 to 9'
+      sleep 3
+    end
+
     break if valid
 
     system 'clear'
@@ -46,7 +61,7 @@ system 'clear'
 name = ''
 loop do
   system 'clear'
-  puts 'What is your name PLAYER #1 ? '
+  puts 'What is your name PLAYER #1? '
   name = gets.chomp
   break if valid?(name)
 end
@@ -55,7 +70,7 @@ player1 = Player.new(name, 1)
 name = ''
 loop do
   system 'clear'
-  puts 'What is your name PLAYER #2 ? '
+  puts 'What is your name PLAYER #2? '
   name = gets.chomp
   break if valid?(name)
 end
