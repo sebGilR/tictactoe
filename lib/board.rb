@@ -44,7 +44,7 @@ class Board
     loop do
       result = (@@win_combos[i - 1] - played).empty?
       i += 1
-      break if result == true || i == @@win_combos.length
+      break if result == true || i == @@win_combos.length + 1
     end
     result
   end
