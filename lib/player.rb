@@ -16,8 +16,7 @@ class Player
   end
 
   def save_play(cell)
-    p @played_cells.class
-    @played_cells.to_a.push(cell) 
+    @played_cells.push(cell) 
   end
 
   def played_cells

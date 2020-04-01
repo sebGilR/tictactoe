@@ -3,11 +3,11 @@ require './lib/board.rb'
 require './lib/player.rb'
 
 def board_draw(board)
-  puts "#{board[1]} | #{board[2]} | #{board[3]}"
-  puts "----------"
-  puts "#{board[4]} | #{board[5]} | #{board[6]}"
-  puts "----------"
-  puts "#{board[7]} | #{board[8]} | #{board[9]}"
+  puts " #{board[1]} | #{board[2]} | #{board[3]}"
+  puts "-----------"
+  puts " #{board[4]} | #{board[5]} | #{board[6]}"
+  puts "-----------"
+  puts " #{board[7]} | #{board[8]} | #{board[9]}"
 end
 
 def is_valid?(name)
@@ -15,36 +15,36 @@ def is_valid?(name)
   false
 end
 
+def save(movement, player)
+  player.save_play(movement.to_i)
+  Board.update_cell(movement.to_i,player.symb)
+end
+
 def get_movement(player)
-  movement=''
+  movement = ''
   loop do
-    p "Select a valid cell, #{player.name} ?"
+    puts "\nSelect a valid cell, #{player.name} ?"
     movement=gets.chomp
-    valid=true
-    if movement.match(/\d/)
+    valid=false
+    if movement.match(/\d+/)
       valid=Board.exists?(movement.to_i)
-      p valid.to_s
       valid=!Board.busy?(movement.to_i) if valid
-      p valid.to_s
     end
     break if valid
   end
-  player.save_play(movement.to_i)
-  Board.update_cell(movement.to_i,player.symb)
-  winner=player if Board.win?(player.played_cells)
-
+  save(movement, player)
 end
 
 system "clear"
 puts "W E L C O M E    T O   T I C T A C T O E!"
-sleep 3
+sleep 2
 system "clear"
 
 #get names
 name=''
 loop do
   system "clear"
-  p 'What is your name palyer1 ? '
+  puts 'What is your name palyer1 ? '
   name=gets.chomp
   break if is_valid?(name)
 end 
@@ -53,34 +53,38 @@ player1=Player.new(name,1)
 name=''
 loop do
   system "clear"
-  p 'What is your name palyer2 ? '
+  puts 'What is your name palyer2 ? '
   name=gets.chomp
   break if is_valid?(name)
 end
 player2=Player.new(name,2)
 
-p "Player1 #{player1.name} Player2 #{player2.name}"
 sleep 1
 # 'SHOW EMPTY BOARD'
 system "clear"
 Board.create_board
-board_draw(Board.board)
-p 'push enter to continue..'
-gets
 
 i=0   #counter to control left cells
 winner=nil
 loop do
+    board_draw(Board.board)
     get_movement(player1)
+    winner = player1.name if Board.win?(player1.played_cells)
+    i+=1
+    break if winner == player1.name|| i == 9
     sleep 1
     system "clear"
-    i+=1
-    break if i==5
+
+    board_draw(Board.board)
     get_movement(player2)
+    winner = player2.name if Board.win?(player2.played_cells)
     i+=1
-    break if i==5 || winner
+    break if winner == player2.name || i == 9
     sleep 1
     system "clear"
 end
-p "#{winner.name} IS THE WINNER!" if winner
-p 'GAME OVER !'
+
+system "clear"
+board_draw(Board.board)
+puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
+puts '\nGAME OVER! It\'s a tie' if i == 9 && !winner

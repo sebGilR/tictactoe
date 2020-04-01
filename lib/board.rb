@@ -29,14 +29,16 @@ class Board
   end
 
   def self.busy?(value)
-    print @@board[value]
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
   def self.win?(played)
     result = false
-    @@win_combos.each do |combo|
-      result = (combo - played).empty?
+    i = 1
+    loop do
+      result = (@@win_combos[i - 1] - played).empty?
+      i += 1
+      break if result == true || i == @@win_combos.length
     end
     result
   end
