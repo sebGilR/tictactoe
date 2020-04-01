@@ -21,6 +21,23 @@ def save(movement, player)
   Board.update_cell(movement.to_i, player.symb)
 end
 
+def retry_input(player)
+  system 'clear'
+  board_draw(Board.board)
+  puts "\nThe selected cell is either busy or doesn\'t exist."
+  get_movement(player)
+end
+
+def continue
+  system 'clear'
+  board_draw(Board.board)
+end
+
+def request_new
+  puts 'Please enter a number from 1 to 9'
+  sleep 3
+end
+
 def get_movement(player)
   movement = ''
   loop do
@@ -28,28 +45,21 @@ def get_movement(player)
     print 'Select a valid cell by entering the cell number: '
     movement = gets.chomp
     valid = false
-
     if movement.match(/\d+/)
       if Board.valid_move?(movement.to_i)
         valid = true
+        save(movement, player)
       else
-        system 'clear'
-        board_draw(Board.board)
-        puts "\nThe selected cell is either busy or doesn\'t exist."
-        get_movement(player)
+        retry_input(player)
         break
       end
     else
-      puts 'Please enter a number from 1 to 9'
-      sleep 3
+      request_new
     end
-
     break if valid
 
-    system 'clear'
-    board_draw(Board.board)
+    continue
   end
-  save(movement, player)
 end
 
 system 'clear'
