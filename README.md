@@ -1,6 +1,6 @@
 # TicTacToe - RUBY
 
-> This is a TicTacToe game you can play in the command line.
+> This is a TicTacToe game you can play in the command line. The objective is to apply OOP principles to the design of this game.
 
 - [Project Description (Assignment 1)](https://www.theodinproject.com/courses/ruby-programming/lessons/oop)
 
