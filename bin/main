@@ -115,4 +115,4 @@ end
 system 'clear'
 board_draw(Board.board)
 puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
-puts '\nGAME OVER! It\'s a tie' if i == 9 && !winner
+puts "\nGAME OVER! It\'s a tie" if i == 9 && !winner
