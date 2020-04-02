@@ -14,10 +14,8 @@ class Board
   ]
 
   def self.create_board
-    i = 1
-    while i < 10
+    (1..9).each do |i|
       @@board[i] = i.to_s
-      i += 1
     end
   end
 
@@ -33,13 +31,18 @@ class Board
     @@board[value] == 'X' || @@board[value] == 'O'
   end
 
+  def self.valid_move?(movement)
+    valid = Board.exists?(movement.to_i)
+    !Board.busy?(movement.to_i) if valid
+  end
+
   def self.win?(played)
     result = false
     i = 1
     loop do
       result = (@@win_combos[i - 1] - played).empty?
       i += 1
-      break if result == true || i == @@win_combos.length
+      break if result == true || i == @@win_combos.length + 1
     end
     result
   end
