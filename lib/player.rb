@@ -1,6 +1,5 @@
 class Player
-  attr_reader :name
-  attr_reader :played_cells
+  attr_reader :name, :played_cells
 
   def initialize(name, id)
     @name = name

@@ -1,4 +1,4 @@
-require_relative '../bin/main.rb'
+require './bin/main.rb'
 
 RSpec.describe 'main' do
 
