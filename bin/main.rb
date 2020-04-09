@@ -2,7 +2,7 @@
 require './lib/board.rb'
 require './lib/player.rb'
 
-def main
+class Gamels
   def board_draw(board)
     puts " #{board[1]} | #{board[2]} | #{board[3]}",
          '-' * 11,
@@ -62,59 +62,65 @@ def main
       continue
     end
   end
-  
-  system 'clear'
-  puts 'W E L C O M E    T O   T I C T A C T O E!'
-  sleep 2
-  system 'clear'
-  
-  # get names
-  name = ''
-  loop do
+
+  def welcome_screen
     system 'clear'
-    puts 'What is your name PLAYER #1? '
-    name = gets.chomp
-    break if valid?(name)
-  end
-  player1 = Player.new(name, 1)
-  
-  name = ''
-  loop do
+    puts 'W E L C O M E    T O   T I C T A C T O E!'
+    sleep 2
     system 'clear'
-    puts 'What is your name PLAYER #2? '
-    name = gets.chomp
-    break if valid?(name)
   end
-  player2 = Player.new(name, 2)
-  
-  sleep 1
-  system 'clear'
-  Board.create_board
-  
-  i = 0 # counter to control left cells
-  winner = nil
-  loop do
-    board_draw(Board.board)
-    get_movement(player1)
-    winner = player1.name if Board.win?(player1.played_cells)
-    i += 1
-    break if winner == player1.name || i == 9
-  
+
+  def get_name(number)
+    name=""
+    loop do
+      system 'clear'
+      puts "@What is your name PLAYER #{number}?"
+      name = gets.chomp
+      break if valid?(name)
+    end
+    return name
+  end  
+    
+  def game_cycle
+    welcome_screen
+    name=get_name(1)
+    player1 = Player.new(name, 1)
+    name=get_name(2)
+    player2 = Player.new(name, 2)
     sleep 1
     system 'clear'
-  
-    board_draw(Board.board)
-    get_movement(player2)
-    winner = player2.name if Board.win?(player2.played_cells)
-    i += 1
-    break if winner == player2.name || i == 9
-  
-    sleep 1
+    Board.create_board
+    i = 0 # counter to control left cells
+    winner = nil
+    loop do
+      board_draw(Board.board)
+      get_movement(player1)
+      winner = player1.name if Board.win?(player1.played_cells)
+      i += 1
+      break if winner == player1.name || i == 9
+    
+      sleep 1
+      system 'clear'
+    
+      board_draw(Board.board)
+      get_movement(player2)
+      winner = player2.name if Board.win?(player2.played_cells)
+      i += 1
+      break if winner == player2.name || i == 9
+    
+      sleep 1
+      system 'clear'
+    end
+    
     system 'clear'
-  end
+    board_draw(Board.board)
+    puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
+    puts "\nGAME OVER! It\'s a tie" if i == 9 && !winner
   
-  system 'clear'
-  board_draw(Board.board)
-  puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
-  puts "\nGAME OVER! It\'s a tie" if i == 9 && !winner
+  end
+   
 end
+
+
+#run_game=Gamels.new
+#run_game.game_cycle
