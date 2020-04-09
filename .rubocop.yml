@@ -22,6 +22,16 @@ Metrics/PerceivedComplexity:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
+Lint/RaiseException:
+  Lint/StructNewOverride:
+    Enabled: false
+  Style/HashEachMethods:
+    Enabled: false
+  Style/HashTransformKeys:
+    Enabled: false
+  Style/HashTransformValues:
+    Enabled: false
+
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
