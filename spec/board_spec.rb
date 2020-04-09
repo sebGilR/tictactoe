@@ -61,4 +61,26 @@ RSpec.describe Board do
       expect(Board.valid_move?(10)).to eql(false)
     end
   end
+
+  describe '.win?' do
+    it 'returns true if there is a win match' do
+      Board.create_board
+      played = [1, 2, 3]
+      expect(Board.win?(played)).to eql(true)
+    end
+
+    it 'returns false if there is not a win match' do
+      Board.create_board
+      played = [1, 2, 5]
+      expect(Board.win?(played)).to eql(false)
+    end
+  end
+
+  describe 'update_cell' do
+    it 'update the hash value for the given key and symbol' do
+      Board.create_board
+      Board.update_cell(1, 'X')
+      expect(board[1]).to eql('X')
+    end
+  end
 end

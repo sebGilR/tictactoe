@@ -116,11 +116,8 @@ class Gamels
     board_draw(Board.board)
     puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
     puts "\nGAME OVER! It\'s a tie" if i == 9 && !winner
-  
   end
-   
 end
 
-
-#run_game=Gamels.new
-#run_game.game_cycle
+# run_game=Gamels.new
+# run_game.game_cycle
