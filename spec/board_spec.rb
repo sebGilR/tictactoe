@@ -69,6 +69,18 @@ RSpec.describe Board do
       expect(Board.win?(played)).to eql(true)
     end
 
+    it 'returns true if there is a win match vertically' do
+      Board.create_board
+      played = [1, 5, 9]
+      expect(Board.win?(played)).to eql(true)
+    end
+
+    it 'returns true if there is a win match diagonally' do
+      Board.create_board
+      played = [1, 4, 7]
+      expect(Board.win?(played)).to eql(true)
+    end
+
     it 'returns false if there is not a win match' do
       Board.create_board
       played = [1, 2, 5]

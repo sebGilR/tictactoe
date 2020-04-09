@@ -11,12 +11,11 @@
 ## Start the game
 
 - Clone/download this repo and change directory into the tictactoe folder.
-- Uncomment lines 122 and 123 from bin/main.rb
 - Run "ruby bin/main.rb"
 
 ## Test the game
 
-- Make sure lines 122 and 123 from bin/main.rb are commented to avoid execution while testing.
+- Comment lines 122 and 123 from bin/main.rb to avoid execution while testing.
 - Run the "rspec" command from the root folder of the project.
 
 ## Screenshot

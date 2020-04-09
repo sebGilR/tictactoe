@@ -81,43 +81,62 @@ class Gamels
     name
   end
 
-  def game_cycle
-    welcome_screen
-    name = get_name(1)
-    player1 = Player.new(name, 1)
-    name = get_name(2)
-    player2 = Player.new(name, 2)
-    sleep 1
-    system 'clear'
-    Board.create_board
-    i = 0 # counter to control left cells
-    winner = nil
-    loop do
-      board_draw(Board.board)
-      get_movement(player1)
-      winner = player1.name if Board.win?(player1.played_cells)
-      i += 1
-      break if winner == player1.name || i == 9
+  def winner(player)
+    player.name if Board.win?(player.played_cells)
+  end
 
-      sleep 1
-      system 'clear'
-
-      board_draw(Board.board)
-      get_movement(player2)
-      winner = player2.name if Board.win?(player2.played_cells)
-      i += 1
-      break if winner == player2.name || i == 9
-
-      sleep 1
-      system 'clear'
-    end
-
+  def cycle_reset(winner, counter)
     system 'clear'
     board_draw(Board.board)
     puts "\n#{winner.upcase} JUST WON THE GAME!" if winner
-    puts "\nGAME OVER! It\'s a tie" if i == 9 && !winner
+    puts "\nGAME OVER! It\'s a tie" if counter == 9 && !winner
+  end
+
+  def screen_clear
+    sleep 1
+    system 'clear'
+  end
+
+  def player_cycle(player)
+    board_draw(Board.board)
+    get_movement(player)
+  end
+
+  def player_setup1
+    name = get_name(1)
+    @player1 = Player.new(name, 1)
+  end
+
+  def player_setup2
+    name = get_name(2)
+    @player2 = Player.new(name, 2)
+  end
+
+  def game_cycle
+    welcome_screen
+    player_setup1
+    player_setup2
+    screen_clear
+    Board.create_board
+    counter = 0 # counter to control left cells
+    winner = nil
+    loop do
+      player_cycle(@player1)
+      winner = winner(@player1)
+      counter += 1
+      break if winner == @player1.name || counter == 9
+
+      screen_clear
+      player_cycle(@player2)
+      winner = winner(@player2)
+      counter += 1
+      break if winner == @player2.name || counter == 9
+
+      screen_clear
+    end
+    cycle_reset(winner, counter)
   end
 end
 
-# run_game=Gamels.new
-# run_game.game_cycle
+run_game = Gamels.new
+run_game.game_cycle
