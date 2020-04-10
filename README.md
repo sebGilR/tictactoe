@@ -15,7 +15,7 @@
 
 ## Test the game
 
-- Comment lines 122 and 123 from bin/main.rb to avoid execution while testing.
+- Comment lines 142 and 143 from bin/main.rb to avoid execution while testing.
 - Run the "rspec" command from the root folder of the project.
 
 ## Screenshot
