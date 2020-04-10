@@ -138,5 +138,6 @@ class Gamels
   end
 end
 
-# run_game = Gamels.new
-# run_game.game_cycle
+# Comment the next two lines before running rspec tests.
+run_game = Gamels.new
+run_game.game_cycle
