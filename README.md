@@ -1,6 +1,6 @@
 # TicTacToe - RUBY
 
-> This is a TicTacToe game you can play in the command line. The objective is to apply OOP principles to the design of this game.
+> This is a TicTacToe game you can play in the command line. The objective is to apply OOP principles to the design of this game. Game method specifications created and tested using RSpec.
 
 - [Project Description (Assignment 1)](https://www.theodinproject.com/courses/ruby-programming/lessons/oop)
 
@@ -11,8 +11,12 @@
 ## Start the game
 
 - Clone/download this repo and change directory into the tictactoe folder.
-- Make the file executable ([How to](https://commandercoriander.net/blog/2013/02/16/making-a-ruby-script-executable/)) or rename the "main" file in the "bin" directory to "main.rb".
-- If the file is executable run "bin/main", otherwise run "ruby bin/main.rb"
+- Run "ruby bin/main.rb"
+
+## Test the game
+
+- Comment lines 122 and 123 from bin/main.rb to avoid execution while testing.
+- Run the "rspec" command from the root folder of the project.
 
 ## Screenshot
 
@@ -35,6 +39,7 @@
 ## Built With
 
 - Ruby
+- RSpect
 
 ## Authors
 
