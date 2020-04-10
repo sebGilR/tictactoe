@@ -74,7 +74,7 @@ class Gamels
     name = ''
     loop do
       system 'clear'
-      puts "@What is your name PLAYER #{number}?"
+      puts "What is your name PLAYER #{number}?"
       name = gets.chomp
       break if valid?(name)
     end
@@ -138,5 +138,5 @@ class Gamels
   end
 end
 
-run_game = Gamels.new
-run_game.game_cycle
+# run_game = Gamels.new
+# run_game.game_cycle
