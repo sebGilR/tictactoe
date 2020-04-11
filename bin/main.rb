@@ -2,6 +2,8 @@
 require './lib/board.rb'
 require './lib/player.rb'
 
+command = ARGV.first
+
 class Gamels
   def board_draw(board)
     puts " #{board[1]} | #{board[2]} | #{board[3]}",
@@ -44,7 +46,7 @@ class Gamels
     loop do
       puts "\n#{player.name}, your symbol is: #{player.symb}"
       print 'Select a valid cell by entering the cell number: '
-      movement = gets.chomp
+      movement = $stdin.gets.chomp
       valid = false
       if movement.match(/\d+/)
         if Board.valid_move?(movement.to_i)
@@ -75,7 +77,7 @@ class Gamels
     loop do
       system 'clear'
       puts "What is your name PLAYER #{number}?"
-      name = gets.chomp
+      name = $stdin.gets.chomp
       break if valid?(name)
     end
     name
@@ -140,4 +142,9 @@ end
 
 # Comment the next two lines before running rspec tests.
 run_game = Gamels.new
-run_game.game_cycle
+
+def run_it(command, run_game)
+  run_game.game_cycle if command == 'run'
+end
+
+run_it(command, run_game)
