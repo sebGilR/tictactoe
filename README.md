@@ -4,6 +4,10 @@
 
 - [Project Description (Assignment 1)](https://www.theodinproject.com/courses/ruby-programming/lessons/oop)
 
+## Potential features
+
+- Keeping a log of a winners and win count.
+
 ## Prerequisites
 
 - Ruby installed ([How to install](https://www.theodinproject.com/courses/web-development-101/lessons/installing-ruby))
